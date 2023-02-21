@@ -15,6 +15,26 @@ Time Complexity: O(log N)
 
  */
 
-function findFloor() {}
+function findFloor(arr, val) {
+  let left = 0;
+  let right = arr.length - 1;
+  if (arr.length === 0) return -1;
+  if (val >= arr[right]) return arr[right];
+  if (val < arr[left] || val > arr[right]) return -1;
+
+  while (left <= right) {
+    var middleIdx = Math.floor((left + right) / 2);
+    if (arr[middleIdx] === val) {
+      return arr[middleIdx];
+    } else if (val < arr[middleIdx] && arr[middleIdx - 1] <= val) {
+      return arr[middleIdx - 1];
+    } else if (val < arr[middleIdx]) {
+      right = middleIdx - 1;
+    } else {
+      left = middleIdx + 1;
+    }
+  }
+  return -1;
+}
 
 module.exports = findFloor;
